@@ -1,0 +1,26 @@
+---
+# vars file for mediawiki-migration
+
+##
+memi_essential_packages:
+  - python3-mysqldb
+  - php-mysql
+  - php-xml
+  - php-mbstring
+  - php-ldap
+  - php-gd
+  - ldap-utils
+
+## default file ownership
+memi_default_file_owner: root
+memi_default_file_group: www-data
+memi_default_file_mode: "a+rX"
+
+## writable file permissions for web-server.
+memi_writable_file_owner: www-data
+memi_writable_file_group: root
+memi_writable_file_mode: "u+rwX,go-rwX"
+
+
+## mysql db
+memi_mysql_priv: "*.*:ALL,GRANT"
