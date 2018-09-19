@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: mediawiki-restoredb
   author: Yasuhiro ABE
   description: Installs the LTS mediawiki 1.31.0 with your mysql db-dump file.
 
