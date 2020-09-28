@@ -1,11 +1,11 @@
 YasuhiroABE.mediawiki-restoredb
 ===============================
-This module might be useful to setup the copy of the existing mediawiki system or restore the service from a db backup file.
+This module might be useful to setup another system using the copy of the existing mediawiki system or to restore the service from a db backup file.
 
 Requirements
 ------------
 This module expects that the target host is a LAMP stack.
-If your mysql server is working on another host, the system is not supported.
+If your mysql server is working on another host, the kind of system has not been tested.
 
 It is tested on the following system to setup new mediawiki LTS (1.31.0) with former LTS (1.27.4) db dump file.
 
@@ -71,7 +71,7 @@ Example Playbook
         memi_mediawiki_additional_files:
           - { src: "files/toplogo.png", dest: "{{ memi_mediawiki_destdir }}/images" }
       roles:
-         - mediawiki-migration
+         - yasuhiroabe.mediawiki-migration
 
 License
 -------
