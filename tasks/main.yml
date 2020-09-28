@@ -1,28 +1,23 @@
 ---
 # tasks file for mediawiki-migration
-
 - name: prepare essential apt modules
   apt:
     name: "{{ item }}"
     state: present
   with_items: "{{ memi_essential_packages }}"
-    
 - name: prepare temporary directory
   tempfile:
     state: directory
   register: tpath
-
 - name: copy db_backup file into the temporary directory
   copy:
     src: "{{ inventory_dir }}/{{ memi_restoredb_filepath }}"
     dest: "{{ tpath.path }}/{{ memi_restoredb_filepath | basename }}"
-
 - name: restore db from dump
   mysql_db:
     name: "{{ memi_restore_dbname }}"
     state: import
     target: "{{ tpath.path }}/{{ memi_restoredb_filepath | basename }}"
-
 - name: prepare dest directory
   file:
     path: "{{ memi_mediawiki_destdir }}"
@@ -30,7 +25,6 @@
     owner: "{{ memi_default_file_owner }}"
     group: "{{ memi_default_file_group }}"
     mode: "{{ memi_default_file_mode }}"
-    
 - name: extract the mediawiki tarball eliminating the top directory
   unarchive:
     src: "{{ inventory_dir }}/{{ memi_mediawiki_filepath }}"
@@ -39,7 +33,6 @@
     owner: "{{ memi_default_file_owner }}"
     group: "{{ memi_default_file_group }}"
     mode: "{{ memi_default_file_mode }}"
-    
 - name: copy LocalSettings.php to remote host
   template:
     src: "{{ inventory_dir }}/files/LocalSettings.php.j2"
@@ -47,7 +40,6 @@
     owner: "{{ memi_writable_file_owner }}"
     group: "{{ memi_writable_file_group }}"
     mode: "{{ memi_writable_file_mode }}"
-
 - name: setting user and priviledges
   mysql_user:
     name: "{{ memi_mysql_user }}"
@@ -59,12 +51,11 @@
   unarchive:
     src: "{{ inventory_dir }}/{{ item }}"
     dest: "{{ memi_mediawiki_destdir }}/extensions"
-    copy: yes
+    copy: true
     owner: "{{ memi_default_file_owner }}"
     group: "{{ memi_default_file_group }}"
     mode: "{{ memi_default_file_mode }}"
   with_items: "{{ memi_mediawiki_extensions_filepath }}"
-
 - name: copy the logo and other files
   copy:
     src: "{{ inventory_dir }}/{{ item.src }}"
@@ -74,7 +65,6 @@
     mode: "{{ memi_default_file_mode }}"
   with_items:
     - "{{ memi_mediawiki_additional_files }}"
-  
 - name: change writable permissions
   file:
     path: "{{ item }}"
@@ -84,17 +74,13 @@
   with_items:
     - "{{ memi_mediawiki_destdir }}/images"
     - "{{ memi_mediawiki_destdir }}/LocalSettings.php"
-
 - name: finally execute update.php
   command: /usr/bin/php update.php chdir="{{ memi_mediawiki_destdir }}/maintenance"
-
 - name: restart web-server, it is essential to activate changes
   systemd:
     name: apache2
     state: restarted
-
 - name: remove temporary directory
   file:
     path: "{{ tpath.path }}"
     state: absent
-
