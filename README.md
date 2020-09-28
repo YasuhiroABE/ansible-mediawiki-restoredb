@@ -33,7 +33,7 @@ Role Variables
 
 	## mediawiki targzball filepath
 	memi_mediawiki_filepath: "files/mediawiki-1.31.0.tar.gz"
-	## list of extention targzball filepath which will extract on {{ memi_mediawiki_destdir }}/extensions/
+	## list of extension targzball filepath which will extract on {{ memi_mediawiki_destdir }}/extensions/
 	## e.g. - "files/GraphViz-REL1_31-9abad17.tar.gz"
 	memi_mediawiki_extensions_filepath: []
 	  
@@ -45,7 +45,7 @@ Role Variables
 	## mysql settings ##
 	####################
 	## mysql dump filepath.
-	memi_restoredb_filepath: "files/dump.sql.gz"w
+	memi_restoredb_filepath: "files/dump.sql.gz"
 	##
 	## * Please overwrite followings on playbook.yml
 	##
