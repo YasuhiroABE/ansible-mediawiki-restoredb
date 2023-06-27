@@ -5,18 +5,18 @@ This module might be useful to setup another system using the copy of the existi
 Requirements
 ------------
 This module expects that the target host is a LAMP stack.
-If your mysql server is working on another host, the kind of system has not been tested.
+If your mysql server is working on another host, such cases have not been tested.
 
-It is tested on the following system to setup new mediawiki LTS (1.31.0) with former LTS (1.27.4) db dump file.
+It is tested on the following system with mediawiki LTS 1.39.3 and former LTS (1.35.9) db dump file.
 
-* Ubuntu 18.04.1 LTS on VMWare workstation.
+* Ubuntu 22.04.2 LTS (amd64)
 
 ### Additional Files
 
 At least, this module expects that following files are placed.
 
-* templates/LocalSettings.php.j2
-* files/mediawiki-1.31.0.tar.gz
+* files/LocalSettings.php.j2
+* files/mediawiki-1.39.3.tar.gz
 * files/dump.sql.gz
 
 If you need extensions, these targzball should be placed as follows.
