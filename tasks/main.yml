@@ -16,6 +16,8 @@
 - name: restore db from dump
   mysql_db:
     name: "{{ memi_restore_dbname }}"
+    login_user: "{{ memi_mysql_user }}"
+    login_password: "{{ memi_mysql_pass }}"
     state: import
     target: "{{ tpath.path }}/{{ memi_restoredb_filepath | basename }}"
 - name: prepare dest directory
@@ -44,6 +46,8 @@
   mysql_user:
     name: "{{ memi_mysql_user }}"
     password: "{{ memi_mysql_pass }}"
+    login_user: "{{ memi_mysql_user }}"
+    login_password: "{{ memi_mysql_pass }}"
     priv: "{{ memi_mysql_priv }}"
     state: present
 
