@@ -3,7 +3,7 @@
 
 ##
 memi_essential_packages:
-  - python3-mysqldb
+  - python3-pymysql
   - php-mysql
   - php-xml
   - php-mbstring

@@ -4,6 +4,9 @@
 ## mediawiki extract directory
 memi_mediawiki_destdir: "/var/www/html/mediawiki"
 
+## mediawiki server socket path
+memi_mediawiki_socket_filepath: "/var/run/mysqld/mysqld.sock"
+
 ## mediawiki targzball filepath
 memi_mediawiki_filepath: "files/mediawiki-1.31.0.tar.gz"
 ## list of extention targzball filepath which will extract on {{ memi_mediawiki_destdir }}/extensions/

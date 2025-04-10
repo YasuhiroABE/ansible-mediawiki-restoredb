@@ -9,6 +9,13 @@
   tempfile:
     state: directory
   register: tpath
+- name: setting user and priviledges
+  mysql_user:
+    name: "{{ memi_mysql_user }}"
+    password: "{{ memi_mysql_pass }}"
+    login_unix_socket: "{{ memi_mediawiki_socket_filepath }}"
+    priv: "{{ memi_mysql_priv }}"
+    state: present
 - name: copy db_backup file into the temporary directory
   copy:
     src: "{{ inventory_dir }}/{{ memi_restoredb_filepath }}"
@@ -42,14 +49,6 @@
     owner: "{{ memi_writable_file_owner }}"
     group: "{{ memi_writable_file_group }}"
     mode: "{{ memi_writable_file_mode }}"
-- name: setting user and priviledges
-  mysql_user:
-    name: "{{ memi_mysql_user }}"
-    password: "{{ memi_mysql_pass }}"
-    login_user: "{{ memi_mysql_user }}"
-    login_password: "{{ memi_mysql_pass }}"
-    priv: "{{ memi_mysql_priv }}"
-    state: present
 
 - name: extract the mediawiki extensions
   unarchive:
