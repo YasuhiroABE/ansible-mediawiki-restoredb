@@ -44,7 +44,7 @@
     mode: "{{ memi_default_file_mode }}"
 - name: copy LocalSettings.php to remote host
   template:
-    src: "{{ inventory_dir }}/files/LocalSettings.php.j2"
+    src: "{{ inventory_dir }}/{{ memi_mediawiki_config_jinja2_filepath }}"
     dest: "{{ memi_mediawiki_destdir }}/LocalSettings.php"
     owner: "{{ memi_writable_file_owner }}"
     group: "{{ memi_writable_file_group }}"
